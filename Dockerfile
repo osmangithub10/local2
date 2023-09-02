@@ -5,7 +5,7 @@ FROM python:3.8-slim
 WORKDIR /home/osman/my-app-project/app
 
 # Copy the Python script into the container
-COPY home/osman/my-app-project/app/* .
+COPY home/osman/my-app-project/app.py .
 
 # Expose port 80 for the web server
 EXPOSE 80
