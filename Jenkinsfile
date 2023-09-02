@@ -28,9 +28,9 @@ pipeline {
                     def registryPassword = 'Cimbom10.'  // Replace with your registry password
 
                     // Log in to the Docker registry
-                    docker.withRegistry(registryUsername, registryPassword) {
-                        docker.image(imageName).push()
-                    }
+                    docker.withRegistry(registryUsername, registryPassword) 
+                    docker.image(imageName).push()
+                    
                 }
             }    
         }   
