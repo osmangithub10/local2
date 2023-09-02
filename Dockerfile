@@ -5,10 +5,10 @@ FROM python:3.8-slim
 WORKDIR /home/osman/my-app-project/app
 
 # Copy the Python script into the container
-COPY home/osman/my-app-project/app.py .
+COPY app.py .
 
 # Expose port 80 for the web server
 EXPOSE 80
 
 # Define the command to run when the container starts
-CMD ["python", "home/osman/my-app-project/app/app.py"]
+CMD ["python", "app.py"]
