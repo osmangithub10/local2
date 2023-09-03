@@ -27,7 +27,7 @@ pipeline {
                     def dockerHubAccessToken = 'dckr_pat_QR1uvor6Ldo-2vDx3-HVNwavtdA'  // Replace with your Docker Hub access token
 
                     // Log in to Docker Hub using the access token
-                    withCredentials([string(credentialsId: 'docker-token-credential', variable: 'DOCKERHUB_CREDENTIALS')]) {
+                    withCredentials([string(credentialsId: dockerHubAccessToken, variable: 'DOCKERHUB_CREDENTIALS')]) {
                         sh "echo $DOCKERHUB_CREDENTIALS | docker login -u docker10hub --password-stdin docker.io"
                     }
 
