@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Define the Docker image name and tag
-                    def dockerimageName = 'my-web-app:1.0'  // Replace with your image name and tag
+                    def dockerimageName = 'docker10hub/my-web-app:1.0'  // Replace with your image name and tag
                     def dockerHubAccessToken = 'dckr_pat_QR1uvor6Ldo-2vDx3-HVNwavtdA'  // Replace with your Docker Hub access token
                     def dockerHubCredentialID = 'docker-token-credential'
 
