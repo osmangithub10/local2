@@ -22,11 +22,17 @@ pipeline {
         stage('Push Docker Image to Registry') {
             steps {
                 script {
-                    def imageName = 'my-web-app:1.0'  // The same image name and tag from Step 1
-                    docker.withRegistry('', 'docker-registry-credentials') {
-                        // Push the Docker image to Docker Hub
-                        docker.image(imageName).push()
+                    // Define the Docker image name and tag
+                    def imageName = 'docker10hub/my-web-app:1.0'  // Replace with your image name and tag
+                    def dockerHubAccessToken = 'dckr_pat_QR1uvor6Ldo-2vDx3-HVNwavtdA'  // Replace with your Docker Hub access token
+
+                    // Log in to Docker Hub using the access token
+                    withCredentials([string(credentialsId: 'docker-hub-credentials', variable: 'DOCKERHUB_CREDENTIALS')]) {
+                        sh "echo $DOCKERHUB_CREDENTIALS | docker login -u docker10hub --password-stdin"
                     }
+
+                    // Push the Docker image to Docker Hub
+                    docker.image(imageName).push()
                 }
             }    
         }   
