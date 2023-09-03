@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Define the Docker image name and tag
-                    def imageName = 'docker10hub/my-web-app:1.0'  // Replace with your image name and tag
+                    def imageName = 'my-web-app:1.0'  // Replace with your image name and tag
                     def dockerHubAccessToken = 'dckr_pat_QR1uvor6Ldo-2vDx3-HVNwavtdA'  // Replace with your Docker Hub access token
 
                     // Log in to Docker Hub using the access token
@@ -32,8 +32,8 @@ pipeline {
                     }
 
                     // Push the Docker image to Docker Hub
-                    //docker.image(imageName).push()
-                    sh "docker push ${imageName}"
+                    docker.image(imageName).push()
+                    //sh "docker push ${imageName}"
                 }
             }    
         }   
