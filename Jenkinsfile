@@ -32,7 +32,8 @@ pipeline {
                     }
 
                     // Push the Docker image to Docker Hub
-                    docker.image(imageName).push()
+                    //docker.image(imageName).push()
+                    sh "docker push ${imageName}"
                 }
             }    
         }   
