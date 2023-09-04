@@ -55,7 +55,7 @@ pipeline {
 
 
                     // Use kubectl to apply your Kubernetes manifests (e.g., Deployment, Service)
-                    sh 'kubectl apply -f hello-world.yaml'
+                    sh 'kubectl apply -f kubernetes-hello-world.yaml'
             
         
 
