@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     // Definition of the Docker image name and tag
-                    def dockerimageName = 'docker10hub/hello:1.0'  // image name and tag
+                    def dockerimageName = 'docker10hub/hello:1.0'  // Image name and tag
                     def dockerHubAccessToken = 'dckr_pat_B1Ny25usdkb8C8QB7JKWPiwGF4U'  // Docker Hub access token.I did this because, when i try to connect dockerHub, i got some problem.
                     def dockerHubCredentialID = 'docker-token-credential' //Credential already have in Jenkins Credential
                     
@@ -51,7 +51,7 @@ pipeline {
                                credentials: sshCredentials,
                                command: 'echo "Hello from Server3!"'
 
-                    sh 'curl -o kubernetes-hello-world.yaml https://raw.githubusercontent.com/osmangithub10/local2/blob/main/kubernetes-hello-world' //taking yaml file from git.
+                    sh 'curl -o kubernetes-hello-world.yaml https://raw.githubusercontent.com/osmangithub10/local2/blob/main/kubernetes-hello-world' // Pull the yaml file from git.
                     // Use kubectl to apply my Kubernetes manifests deployment
                     sh 'kubectl apply -f kubernetes-hello-world.yaml'
             
