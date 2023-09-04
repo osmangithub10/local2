@@ -53,7 +53,7 @@ pipeline {
                                credentials: sshCredentials,
                                command: 'echo "Hello from Jenkins!"'
 
-
+                    sh 'curl -o kubernetes-hello-world.yaml https://github.com/osmangithub10/local2/edit/main/your-kubernetes-manifests.yaml'
                     // Use kubectl to apply your Kubernetes manifests (e.g., Deployment, Service)
                     sh 'kubectl apply -f kubernetes-hello-world.yaml'
             
