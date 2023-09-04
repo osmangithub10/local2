@@ -8,69 +8,56 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+        stage('Building Docker Image') {
             steps {
                 script {
                     def imageName = 'my-web-app:1.0'  // Specify the image name and tag
-                    def dockerfile = './Dockerfile'  // Path to your Dockerfile within the repository
+                    def dockerfile = './Dockerfile'  // Path to my Dockerfile reposiyory
                     def destinationImageName = 'docker10hub/hello:1.0'
-                    // Build the Docker image
+                    // Building the Docker image
                     docker.build(imageName, "-f ${dockerfile} .")
                     // Tag the image
                     sh "docker tag ${imageName} ${destinationImageName}"
                 }
             }
         }
-        stage('Push Docker Image to Registry') {
+        stage('Pushing Docker Image to Registry') {
             steps {
                 script {
-                    // Define the Docker image name and tag
-                    //def dockerimageName = 'my-web-app:1.0'  // Replace with your image name and tag
-                    def dockerimageName = 'docker10hub/hello:1.0'  // Replace with your image name and tag
-                    def dockerHubAccessToken = 'dckr_pat_B1Ny25usdkb8C8QB7JKWPiwGF4U'  // Replace with your Docker Hub access token
-                    def dockerHubCredentialID = 'docker-token-credential'
+                    // Definition of the Docker image name and tag
+                    def dockerimageName = 'docker10hub/hello:1.0'  // image name and tag
+                    def dockerHubAccessToken = 'dckr_pat_B1Ny25usdkb8C8QB7JKWPiwGF4U'  // Docker Hub access token.I did this because, when i try to connect dockerHub, i got some problem.
+                    def dockerHubCredentialID = 'docker-token-credential' //Credential already have in Jenkins Credential
                     
 
                     // Log in to Docker Hub using the access token
-                    withCredentials([string(credentialsId: dockerHubCredentialID, variable: 'DOCKERHUB_CREDENTIALS')]) {
+                    withCredentials([string(credentialsId: dockerHubCredentialID, variable: 'DOCKERHUB_CREDENTIALS')]) {  // Some credential configuration for Docker hub.
                         sh "echo ${dockerHubAccessToken} | docker login -u docker10hub --password-stdin docker.io"
                     }
-                    // Push the Docker image to Docker Hub
+                    // Pushing the Docker image to Docker Hub
                     //docker.image(imageName).push()
                     sh "docker push ${dockerimageName}"
                     
                 }
             }    
         }
-        stage('SSH to Remote Server') {
+        stage('Deploy the Docker Image to kubernetes Cluster') {
             steps {
                 script {
-                    // Load SSH credentials by ID
-                    def sshCredentials = credentials('SSH')
-
+                    // Loading SSH credentials by ID
+                    def sshCredentials = credentials('SSH') // SSH connection to Kubernetes node on Server 2.
                     // Execute an SSH command
                     sshCommand remote: '10.153.2.130',
                                credentials: sshCredentials,
                                command: 'echo "Hello from Jenkins!"'
 
-                    sh 'curl -o kubernetes-hello-world.yaml https://github.com/osmangithub10/local2/edit/main/your-kubernetes-manifests.yaml'
+                    sh 'curl -o kubernetes-hello-world.yaml https://raw.githubusercontent.com/osmangithub10/local2/blob/main/kubernetes-hello-world'
                     // Use kubectl to apply your Kubernetes manifests (e.g., Deployment, Service)
                     sh 'kubectl apply -f kubernetes-hello-world.yaml'
             
-        
-
-
-                    
                 }
             }
         }
-
-
-
-
-
-        
-           
     }
 }
 
