@@ -49,10 +49,10 @@ pipeline {
                     // Execute an SSH command
                     sshCommand remote: '10.153.2.130',
                                credentials: sshCredentials,
-                               command: 'echo "Hello from Jenkins!"'
+                               command: 'echo "Hello from Server3!"'
 
-                    sh 'curl -o kubernetes-hello-world.yaml https://raw.githubusercontent.com/osmangithub10/local2/blob/main/kubernetes-hello-world'
-                    // Use kubectl to apply your Kubernetes manifests (e.g., Deployment, Service)
+                    sh 'curl -o kubernetes-hello-world.yaml https://raw.githubusercontent.com/osmangithub10/local2/blob/main/kubernetes-hello-world' //taking yaml file from git.
+                    // Use kubectl to apply my Kubernetes manifests deployment
                     sh 'kubectl apply -f kubernetes-hello-world.yaml'
             
                 }
