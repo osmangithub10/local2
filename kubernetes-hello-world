@@ -1,1 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+spec:
+  replicas: 3  #Number of replicas
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: your-app
+    spec:
+      containers:
+        - name: your-app-container
+          image: your-registry/your-image-name:your-tag  # Replace with your image details
+          ports:
+            - containerPort: 80  # Port your application listens on
 
