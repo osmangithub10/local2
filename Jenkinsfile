@@ -42,6 +42,34 @@ pipeline {
                 }
             }    
         }
+        stage('SSH to Remote Server') {
+            steps {
+                script {
+                    // Load SSH credentials by ID
+                    def sshCredentials = credentials('SSH')
+
+                    // Execute an SSH command
+                    sshCommand remote: '10.153.2.130',
+                               credentials: sshCredentials,
+                               command: 'echo "Hello from Jenkins!"'
+
+
+                    // Use kubectl to apply your Kubernetes manifests (e.g., Deployment, Service)
+                    sh 'kubectl apply -f hello-world.yaml'
+            
+        
+
+
+                    
+                }
+            }
+        }
+
+
+
+
+
+        
            
     }
 }
