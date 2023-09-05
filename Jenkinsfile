@@ -8,7 +8,7 @@ pipeline {
             }
         }
 
-        stage('Building Docker Image') {   // First of all, we neet do docker connection.--> sh "docker login -u username -p passsword" 
+        stage('Building Docker Image') {   // First of all, we need to do docker connection.--> sh "docker login -u username -p passsword" 
             steps {
                 script {
                     def imageName = 'my-web-app:1.0'  // Specify the image name and tag
