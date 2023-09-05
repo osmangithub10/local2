@@ -13,17 +13,33 @@ When you open the Oracle VM, you can add new VM with iso file. You can download 
 
 **3.Kubernetes cluster Installation with 1 master and 1 node (You can use the Server-1 and Server-2)**
 (Note:This is for ubuntu releases and we will download multi node server which are master and node.)
+
+
 ***3.1 Master node installitation on Server 1***
 
 apt-get update -y
+
+
 //disable swap
+
+
 swapoff -a
 
 //Install Docker CE
+
+
 apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+
+
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
+
+
 apt-get install docker-ce -y
+
+
 docker --version  //Sample output -->Docker version 20.10.10, build b485636
 
 //Add Kubernetes Repository
