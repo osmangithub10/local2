@@ -31,11 +31,10 @@ pipeline {
                     
 
                     // Log in to Docker Hub using the access token
-                    withCredentials([string(credentialsId: dockerHubCredentialID, variable: 'DOCKERHUB_CREDENTIALS')]) {  // Some credential configuration for Docker hub.
+                    withCredentials([string(credentialsId: dockerHubCredentialID, variable: 'DOCKERHUB_CREDENTIALS')]) {  
                         sh "echo ${dockerHubAccessToken} | docker login -u docker10hub --password-stdin docker.io"
                     }
                     // Pushing the Docker image to Docker Hub
-                    //docker.image(imageName).push()
                     sh "docker push ${dockerimageName}"
                     
                 }
