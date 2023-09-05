@@ -22,12 +22,12 @@ When you open the Oracle VM, you can add new VM with iso file. You can download 
 apt-get update -y
 
 
-//disable swap
+* disable swap
 
 
 swapoff -a
 
-//Install Docker CE
+* Install Docker CE
 
 
 apt-get install apt-transport-https ca-certificates curl software-properties-common -y
@@ -44,7 +44,7 @@ apt-get install docker-ce -y
 
 docker --version  //Sample output -->Docker version 20.10.10, build b485636
 
-//Add Kubernetes Repository
+* Add Kubernetes Repository
 
 
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add
@@ -57,7 +57,7 @@ apt-get update -y
 
 
 
-//Install Kubernetes Components (Kubectl, kubelet and kubeadm)
+* Install Kubernetes Components (Kubectl, kubelet and kubeadm)
 
 
 apt-get install kubelet kubeadm kubectl -y
@@ -91,14 +91,14 @@ systemctl enable docker
 
 
 
-//Initialize Kubernetes Master Node
+* Initialize Kubernetes Master Node
 
 
 kubeadm init --pod-network-cidr=10.244.0.0/16 //you can also write only kubeadm init
 
 
 
-//Result
+* Result
 
 
 Your Kubernetes control-plane has initialized successfully!
@@ -107,14 +107,14 @@ Also, you can take some connection token for nodes.You can store it.It looks lik
 
 
 
-//if you connnect as a root you can write this.
+* if you connnect as a root you can write this.
 
 
 export KUBECONFIG=/etc/kubernetes/admin.con
 
 
 
-//if you connnect as a regular user you can write this.
+* if you connnect as a regular user you can write this.
 
 
 mkdir -p $HOME/.kube
@@ -131,7 +131,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ***3.2 Join Worker Nodes to the Kubernetes Cluster on Server2***
 
 
-//you can take kubeadm join command from master node result part and copy it.
+* you can take kubeadm join command from master node result part and copy it.
 
 
 kubeadm join 69.28.88.236:6443 --token alfisa.guuc5t2f66cpqz8e --discovery-token-ca-cert-hash sha256:1db0bb5317ae1007c1f7774d5281d22b2189b239ffabecaedcd605613a9b10cd
@@ -142,24 +142,24 @@ kubeadm join 69.28.88.236:6443 --token alfisa.guuc5t2f66cpqz8e --discovery-token
 This node has joined the cluster:
 
 
-* Certificate signing request was sent to apiserver and a response was received.
+Certificate signing request was sent to apiserver and a response was received.
 
-* 
-* The Kubelet was informed of the new secure connection details.
+ 
+The Kubelet was informed of the new secure connection details.
 
-* 
+
 Run kubectl get nodes on the control-plane to see this node join the cluster.
 
 
 
-//If you dont see token any more, you can just run command on Server 1 which are master node.
+* If you dont see token any more, you can just run command on Server 1 which are master node.
 
 
 kubeadm token create --print-join-command
 
 
 
-//Now you can go server 1 which are master and check nodes.
+* Now you can go server 1 which are master and check nodes.
 
 
 kubectl get nodes
