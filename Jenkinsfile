@@ -50,9 +50,9 @@ pipeline {
                                credentials: sshCredentials,
                                command: 'echo "Hello from Server3!"'
 
-                    sh 'curl -o kubernetes-hello-world.yaml https://github.com/osmangithub10/local2/blob/main/kubernetes-hello-world' // Pull the yaml file from git.
+                    //sh 'curl -o kubernetes-hello-world.yaml https://github.com/osmangithub10/local2/blob/main/kubernetes-hello-world' // Pull the yaml file from git.
                     // Use kubectl to apply my Kubernetes manifests deployment
-                    sh 'kubectl apply -f kubernetes-hello-world.yaml'
+                    sh 'kubectl apply -f /home/osman/kubernetes-hello-world.yaml'
             
                 }
             }
