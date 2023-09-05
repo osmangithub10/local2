@@ -79,22 +79,23 @@ kubectl get nodes
 kubectl cluster-info
 
 
-
-
-
-
-
-
 **4. Jenkins installation in Server-3**
-
+You can follow this addresses to install Jenkins.
+https://www.jenkins.io/doc/book/installing/linux/
 
 
 
 **5. Docker registry installation in Server-3**
-
-
-
-
+You can follow this addresses to install docker.
+https://docs.docker.com/engine/install/ubuntu/
 
 
 **6. Jenkins pipeline project description**
+You need to do some credentials to connect docker and kubernetes.First of all, building image related to Server 3 which means you need to download also docker for server 3.Second,you can connect docker for  pushing images to docker registry. You can go manage jenkins and add some credential for server 2. Thirdly, you need to do some connection for kubernetes on server 1-2. You need to do again some credentials in Jenkins. Also, you need to download some SSH packet to all server.
+
+
+
+
+
+
+
